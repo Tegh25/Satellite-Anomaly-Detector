@@ -1,2 +1,6 @@
 # Local files not needing to be tracked
 local/
+.env
+
+# Python virtual environments
+venv/
