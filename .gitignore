@@ -1,6 +1,7 @@
 # Local files not needing to be tracked
 local/
 .env
+__pycache__/
 
 # Python virtual environments
 venv/
