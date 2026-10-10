@@ -1,3 +1,4 @@
+import argparse
 import os
 import json
 from pathlib import Path
@@ -19,6 +20,20 @@ BACKBOARD_API_KEY = os.getenv("BACKBOARD_API_KEY")
 BACKBOARD_API_URL = "https://app.backboard.io/api"
 BACKBOARD_LLM_PROVIDER = "anthropic"
 BACKBOARD_MODEL_NAME = "claude-sonnet-5"
+
+ESTIMATED_COST_PER_SEGMENT = 0.007
+
+parser = argparse.ArgumentParser(description="Generate satellite anomaly mission-ops reports.")
+parser.add_argument(
+    "--limit",
+    type=int,
+    default=None,
+    metavar="N",
+    help="Generate at most N uncompleted rows, then exit (default: all remaining).",
+)
+args = parser.parse_args()
+if args.limit is not None and args.limit < 1:
+    parser.error("--limit must be a positive integer")
 
 df = pd.read_csv(DATASET_PATH)
 
@@ -128,10 +143,20 @@ Respond with plain prose only, no headers or markdown formatting. No em dashes."
     )
     response.raise_for_status()
     payload = response.json()
+    print(
+        "input_tokens", payload.get("input_tokens"),
+        "output_tokens", payload.get("output_tokens"),
+        "total_tokens", payload.get("total_tokens"),
+    )
+
     return payload.get("content") or payload.get("message") or ""
 
 done_count = len(completed_ids)
 total = len(df)
+generated_this_run = 0
+
+if args.limit is not None:
+    print(f"Limit: generating up to {args.limit} uncompleted row(s) this run")
 
 for _, row in df.iterrows():
     if row['segment'] in completed_ids:
@@ -141,7 +166,12 @@ for _, row in df.iterrows():
         append_result(OUTPUT_PATH, row['segment'], report)
         completed_ids.add(row['segment'])
         done_count += 1
-        print(f"Done: {done_count}/{total} — est. cost so far: ${done_count * 0.0036:.2f}")
+        generated_this_run += 1
+        print(f"Done: {done_count}/{total} — est. cost so far: ${done_count * ESTIMATED_COST_PER_SEGMENT:.2f}")
     except Exception as e:
         print(f"Row {row['segment']} failed: {e}")
         continue  # move on instead of crashing the whole loop
+
+    if args.limit is not None and generated_this_run >= args.limit:
+        print(f"Reached --limit {args.limit}; stopping.")
+        break
