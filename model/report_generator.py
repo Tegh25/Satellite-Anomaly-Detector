@@ -1,6 +1,8 @@
 import argparse
 import os
 import json
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 import requests
@@ -22,6 +24,7 @@ BACKBOARD_LLM_PROVIDER = "anthropic"
 BACKBOARD_MODEL_NAME = "claude-sonnet-5"
 
 ESTIMATED_COST_PER_SEGMENT = 0.007
+NUM_WORKERS = 4
 
 parser = argparse.ArgumentParser(description="Generate satellite anomaly mission-ops reports.")
 parser.add_argument(
@@ -34,6 +37,9 @@ parser.add_argument(
 args = parser.parse_args()
 if args.limit is not None and args.limit < 1:
     parser.error("--limit must be a positive integer")
+
+io_lock = threading.Lock()
+stop_event = threading.Event()
 
 df = pd.read_csv(DATASET_PATH)
 
@@ -143,11 +149,12 @@ Respond with plain prose only, no headers or markdown formatting. No em dashes."
     )
     response.raise_for_status()
     payload = response.json()
-    print(
-        "input_tokens", payload.get("input_tokens"),
-        "output_tokens", payload.get("output_tokens"),
-        "total_tokens", payload.get("total_tokens"),
-    )
+    with io_lock:
+        print(
+            "input_tokens", payload.get("input_tokens"),
+            "output_tokens", payload.get("output_tokens"),
+            "total_tokens", payload.get("total_tokens"),
+        )
 
     return payload.get("content") or payload.get("message") or ""
 
@@ -155,23 +162,53 @@ done_count = len(completed_ids)
 total = len(df)
 generated_this_run = 0
 
+pending_rows = [row for _, row in df.iterrows() if row["segment"] not in completed_ids]
+print(f"Pending: {len(pending_rows)} rows | workers: {NUM_WORKERS}")
 if args.limit is not None:
     print(f"Limit: generating up to {args.limit} uncompleted row(s) this run")
 
-for _, row in df.iterrows():
-    if row['segment'] in completed_ids:
-        continue  # skip rows already generated on a prior run
+
+def process_row(row):
+    global done_count, generated_this_run
+
+    if stop_event.is_set():
+        return False
+
+    segment_id = row["segment"]
     try:
         report = generate_report(row)
-        append_result(OUTPUT_PATH, row['segment'], report)
-        completed_ids.add(row['segment'])
+    except Exception as e:
+        with io_lock:
+            print(f"Row {segment_id} failed: {e}")
+        return False
+
+    with io_lock:
+        if args.limit is not None and generated_this_run >= args.limit:
+            stop_event.set()
+            return False
+
+        append_result(OUTPUT_PATH, segment_id, report)
+        completed_ids.add(segment_id)
         done_count += 1
         generated_this_run += 1
-        print(f"Done: {done_count}/{total} — est. cost so far: ${done_count * ESTIMATED_COST_PER_SEGMENT:.2f}")
-    except Exception as e:
-        print(f"Row {row['segment']} failed: {e}")
-        continue  # move on instead of crashing the whole loop
+        print(
+            f"Done: {done_count}/{total} — est. cost so far: "
+            f"${done_count * ESTIMATED_COST_PER_SEGMENT:.2f}"
+        )
 
-    if args.limit is not None and generated_this_run >= args.limit:
-        print(f"Reached --limit {args.limit}; stopping.")
-        break
+        if args.limit is not None and generated_this_run >= args.limit:
+            stop_event.set()
+            print(f"Reached --limit {args.limit}; stopping.")
+
+    return True
+
+
+with ThreadPoolExecutor(max_workers=NUM_WORKERS) as executor:
+    futures = [executor.submit(process_row, row) for row in pending_rows]
+    for future in as_completed(futures):
+        if stop_event.is_set():
+            for pending in futures:
+                pending.cancel()
+            break
+        # Surface unexpected worker crashes (should be rare; process_row catches API errors)
+        future.result()
