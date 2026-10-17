@@ -101,7 +101,7 @@ The judge is the same model family as the teacher, so it likely favours the teac
 
 - **It trusts the label it is given.** When the detector's flag was wrong, the report followed the wrong flag in 18 of 18 cases (8 false alarms, 10 missed anomalies). A missed anomaly becomes a confident "no action needed". In the demo this is mitigated by showing the detector's probability and flagging low-confidence segments: TODO, state the cross-validated review-band result here.
 - **Causes are not verified.** The dataset has only a binary label, with no ground-truth cause. The reports contain plausible physical explanations (thermal or power transients, sensor connection issues, timing faults) that the features do not establish. The number check cannot catch invented causes.
-- **It over-weights timing explanations.** On the same 79 anomaly segments, the model recommends a timing- or telemetry-focused next step more often than its teacher (82% vs 68%; it did so 22 times where the teacher did not, and the reverse 9 times, sign test p = 0.029). Greedy decoding amplifies the teacher's majority habit.
+- **It over-weights timing explanations.** On the same 79 anomaly segments, the model recommends a timing- or telemetry-focused next step more often than its teacher (82% vs 66%; it did so 22 times where the teacher did not, and the reverse 9 times, sign test p = 0.029). Greedy decoding amplifies the teacher's majority habit.
 - **Inherits the teacher's flaws.** The student matches its teacher's quality and its limitations.
 - **Narrow scope.** One dataset, features rather than raw signals, English only, and a small evaluation sample with wide intervals.
 - **Judge bias.** See above.

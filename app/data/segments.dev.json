@@ -1,0 +1,942 @@
+[
+ {
+  "segment": 5,
+  "channel": "CADC0872",
+  "features": {
+   "len": 257,
+   "duration": 255,
+   "mean": 1.0584846070038911e-05,
+   "std": 2.2976124092528443e-05,
+   "var": 5.27902278315266e-10,
+   "kurtosis": -1.4843933372949996,
+   "skew": -0.0601548781724772,
+   "n_peaks": 1,
+   "smooth10_n_peaks": 1,
+   "smooth20_n_peaks": 1,
+   "diff_peaks": 78,
+   "diff2_peaks": 87,
+   "diff_var": 5.547101361564531e-13,
+   "diff2_var": 7.035422088489087e-13,
+   "gaps_squared": 357
+  },
+  "dataset_label": 0,
+  "detector": {
+   "pred": 0,
+   "proba": 0.01,
+   "review": false
+  },
+  "outcome": "correct",
+  "reports": {
+   "detector_label": {
+    "text": "This segment looks clean and well-behaved. The mean, variance, and standard deviation are all extremely small and consistent with a quiet, low-amplitude channel, and the kurtosis (-1.484) with near-zero skew (-0.060) points to a flat, symmetric distribution with no spiky outliers or lopsided behavior. Peak counts are minimal (1 raw, 1 smoothed at both window sizes), indicating a single, stable feature in the signal rather than noise-driven multi-peaking, and the derivative peak counts (78 and 87) are proportionate to a 257-sample record, suggesting normal sample-to-sample fluctuation rather than erratic spiking. The sampling gap irregularity value (357) is on the higher side but not extreme, and with no corresponding spike in variance or derivative behavior it doesn't indicate a real timing fault. No action needed; continue routine monitoring of CADC0872.",
+    "number_flags": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ]
+   },
+   "dataset_label": null
+  },
+  "report_source": "finetuned_nf4_greedy",
+  "compare": {
+   "teacher": {
+    "text": "This segment reads as clean and stable. Overall signal amplitude is low and variance is negligible, with a flat, slightly negative kurtosis (-1.484) indicating a broad, non-spiky distribution rather than sharp transients. Only a single peak shows up across raw and both smoothed versions, meaning there's no evidence of oscillation, dropout spiking, or multiple event structures, just one smooth feature over the whole window. The derivative peak counts (78/87) look elevated at first glance, but paired with the very low first and second-derivative variances (~5.5e-13 and ~7e-13), this reflects fine-grained sample-to-sample noise typical of a smooth curve digitized at high resolution, not real instability. Sampling gap irregularity (357) is mildly elevated but not extreme, and with no corresponding disruption in peak structure or variance, it doesn't suggest data loss or timing faults. No action needed; continue standard monitoring for this channel.",
+    "number_flags": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "format_ok": true,
+    "em_dash": false,
+    "words": 141,
+    "unsupported_numbers": []
+   },
+   "base_prompted": {
+    "text": "[DEV PLACEHOLDER, not real model output] This segment looks unremarkable — the mean and variance are small, with a smoothing window of 12 and a ratio of 6.6.",
+    "number_flags": [
+     0,
+     0
+    ],
+    "format_ok": false,
+    "em_dash": true,
+    "words": 28,
+    "unsupported_numbers": [
+     "12",
+     "6.6"
+    ]
+   },
+   "finetuned": {
+    "format_ok": true,
+    "em_dash": false,
+    "words": 129,
+    "unsupported_numbers": []
+   },
+   "judge": [
+    {
+     "vs": "base_prompted",
+     "winner": "finetuned",
+     "reason": "[dev placeholder]",
+     "unsupported_claims": {
+      "finetuned": 0,
+      "base_prompted": 2
+     }
+    },
+    {
+     "vs": "teacher",
+     "winner": "tie",
+     "reason": "[dev placeholder]",
+     "unsupported_claims": {
+      "finetuned": 0,
+      "teacher": 0
+     }
+    }
+   ]
+  }
+ },
+ {
+  "segment": 13,
+  "channel": "CADC0872",
+  "features": {
+   "len": 230,
+   "duration": 229,
+   "mean": -1.595561282608696e-06,
+   "std": 2.4671041910182063e-05,
+   "var": 6.0866030893396e-10,
+   "kurtosis": -0.812622692797941,
+   "skew": 0.3897460704873026,
+   "n_peaks": 1,
+   "smooth10_n_peaks": 1,
+   "smooth20_n_peaks": 1,
+   "diff_peaks": 1,
+   "diff2_peaks": 1,
+   "diff_var": 9.853793080883763e-12,
+   "diff2_var": 1.9199652146969388e-11,
+   "gaps_squared": 229
+  },
+  "dataset_label": 1,
+  "detector": {
+   "pred": 1,
+   "proba": 0.9867,
+   "review": false
+  },
+  "outcome": "correct",
+  "reports": {
+   "detector_label": {
+    "text": "This segment's amplitude statistics (mean, std, variance) are all extremely small and unremarkable, and the shape descriptors (kurtosis -0.813, skew 0.390) show a flat, mildly lopsided but otherwise quiet distribution with no spiky or heavy-tailed behavior. Peak counts are minimal and consistent across raw and smoothed versions (1/1/1), and derivative variances are vanishingly small, indicating no abrupt jumps or oscillatory structure in the signal itself. The one clear outlier here is the sampling gap irregularity value of 229, essentially on the same order as the segment length itself, which points to a timing or acquisition problem rather than a physical excursion in the measured quantity. This pattern is consistent with dropped samples, buffering delays, or a telemetry timing fault rather than a real sensor event, so the recommended next step is to check the onboard data handling or downlink timestamps for this channel around this segment to confirm whether samples were missed or delayed, rather than treating this as a sensor-level anomaly.",
+    "number_flags": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ]
+   },
+   "dataset_label": null
+  },
+  "report_source": "finetuned_nf4_greedy",
+  "compare": {
+   "teacher": {
+    "text": "This segment stands out mainly for how quiet and featureless it is, not for any spike or instability. Mean, variance, and standard deviation are all near the noise floor, kurtosis and skew show a smooth, near-symmetric distribution with no heavy tails, and peak counts (raw and smoothed) are all flat at 1 with no derivative activity to speak of. The one genuinely notable figure is the sampling gap irregularity value of 229, essentially matching the segment length, which suggests the anomaly flag is being driven by irregular or dropped sample timing rather than by the sensor readings themselves. In other words, the data values look electrically and statistically normal, but the timebase for this stretch appears disrupted, possibly from a data-acquisition or telemetry-formatting issue rather than a real physical event on channel CADC0872. Recommend checking the onboard timestamp/packet sequence log for this window to confirm whether samples were dropped, duplicated, or misaligned before treating this as a sensor-level anomaly.",
+    "number_flags": [
+     1,
+     1
+    ],
+    "format_ok": true,
+    "em_dash": false,
+    "words": 159,
+    "unsupported_numbers": []
+   },
+   "base_prompted": {
+    "text": "[DEV PLACEHOLDER, not real model output] This segment looks unremarkable — the mean and variance are small, with a smoothing window of 12 and a ratio of 6.6.",
+    "number_flags": [
+     0,
+     0
+    ],
+    "format_ok": false,
+    "em_dash": true,
+    "words": 28,
+    "unsupported_numbers": [
+     "12",
+     "6.6"
+    ]
+   },
+   "finetuned": {
+    "format_ok": true,
+    "em_dash": false,
+    "words": 162,
+    "unsupported_numbers": []
+   },
+   "judge": [
+    {
+     "vs": "base_prompted",
+     "winner": "finetuned",
+     "reason": "[dev placeholder]",
+     "unsupported_claims": {
+      "finetuned": 0,
+      "base_prompted": 2
+     }
+    },
+    {
+     "vs": "teacher",
+     "winner": "tie",
+     "reason": "[dev placeholder]",
+     "unsupported_claims": {
+      "finetuned": 0,
+      "teacher": 0
+     }
+    }
+   ]
+  }
+ },
+ {
+  "segment": 20,
+  "channel": "CADC0872",
+  "features": {
+   "len": 268,
+   "duration": 267,
+   "mean": 3.992460474626865e-06,
+   "std": 2.320058488808557e-05,
+   "var": 5.382671391492645e-10,
+   "kurtosis": -1.02966075201578,
+   "skew": -0.3120467255345933,
+   "n_peaks": 1,
+   "smooth10_n_peaks": 1,
+   "smooth20_n_peaks": 1,
+   "diff_peaks": 18,
+   "diff2_peaks": 19,
+   "diff_var": 5.083800741327838e-12,
+   "diff2_var": 1.029699471866654e-11,
+   "gaps_squared": 267
+  },
+  "dataset_label": 1,
+  "detector": {
+   "pred": 1,
+   "proba": 0.67,
+   "review": true
+  },
+  "outcome": "correct",
+  "reports": {
+   "detector_label": {
+    "text": "This segment's amplitude statistics (mean, std, variance) are all extremely small and unremarkable, and the raw peak count of 1 with low derivative variance points to a quiet, low-energy signal with no large excursions. The one genuinely notable feature is the sampling gap irregularity value of 267, essentially on the same order as the segment length itself, combined with a derivative peak count of 18/19 that is elevated relative to a single raw peak. This pattern, a flat, low-amplitude signal with many small derivative-level \"peaks\" but no real amplitude spikes, is most consistent with irregular or dropped-out sample timing rather than a genuine physical event, since the sensor itself is not showing any stress or transient behavior, just uneven spacing between readings. Recommend checking the onboard timestamping or telemetry downlink buffer for this channel to confirm whether samples were missed or delayed, rather than treating this as a sensor-level anomaly.",
+    "number_flags": [
+     1,
+     1,
+     1,
+     1
+    ]
+   },
+   "dataset_label": null
+  },
+  "report_source": "finetuned_nf4_greedy",
+  "compare": {
+   "teacher": {
+    "text": "Looking at this segment, the mean, variance, and standard deviation are all low and unremarkable, and the single dominant peak in the raw and both smoothed traces indicates the signal itself is calm with no large excursions or spiky structure. Kurtosis and skew are also mild, ruling out a heavy-tailed or lopsided distribution as the driver. What stands out is the mismatch between that calm amplitude profile and the derivative behavior: 18 first-difference peaks and 19 second-difference peaks packed into only 267 time units, despite very small derivative variance. This pattern points not to a real physical transient but to a timing or sampling issue, likely irregular or jittered sample spacing that is producing many small, closely-spaced direction changes in the derivative without any corresponding change in the signal's overall energy. Recommend ops verify the sampling clock or telemetry timestamps for this channel over the flagged window before assuming a sensor or physical event, since the derivative noise looks like an artifact of uneven time steps rather than genuine signal activity.",
+    "number_flags": [
+     1,
+     1,
+     1
+    ],
+    "format_ok": true,
+    "em_dash": false,
+    "words": 171,
+    "unsupported_numbers": []
+   },
+   "base_prompted": {
+    "text": "[DEV PLACEHOLDER, not real model output] This segment looks unremarkable — the mean and variance are small, with a smoothing window of 12 and a ratio of 6.6.",
+    "number_flags": [
+     0,
+     0
+    ],
+    "format_ok": false,
+    "em_dash": true,
+    "words": 28,
+    "unsupported_numbers": [
+     "12",
+     "6.6"
+    ]
+   },
+   "finetuned": {
+    "format_ok": true,
+    "em_dash": false,
+    "words": 150,
+    "unsupported_numbers": []
+   },
+   "judge": [
+    {
+     "vs": "base_prompted",
+     "winner": "finetuned",
+     "reason": "[dev placeholder]",
+     "unsupported_claims": {
+      "finetuned": 0,
+      "base_prompted": 2
+     }
+    },
+    {
+     "vs": "teacher",
+     "winner": "tie",
+     "reason": "[dev placeholder]",
+     "unsupported_claims": {
+      "finetuned": 0,
+      "teacher": 0
+     }
+    }
+   ]
+  }
+ },
+ {
+  "segment": 235,
+  "channel": "CADC0892",
+  "features": {
+   "len": 27,
+   "duration": 250,
+   "mean": 0.0514718814814814,
+   "std": 0.1327053005075895,
+   "var": 0.0176106967828096,
+   "kurtosis": 6.167141894914868,
+   "skew": 2.705066235608958,
+   "n_peaks": 1,
+   "smooth10_n_peaks": 1,
+   "smooth20_n_peaks": 1,
+   "diff_peaks": 1,
+   "diff2_peaks": 2,
+   "diff_var": 0.0141764224068184,
+   "diff2_var": 0.0319037527611136,
+   "gaps_squared": 16250
+  },
+  "dataset_label": 1,
+  "detector": {
+   "pred": 1,
+   "proba": 0.85,
+   "review": true
+  },
+  "outcome": "correct",
+  "reports": {
+   "detector_label": {
+    "text": "Mission-ops assessment for CADC0892: the dominant signal here is the distribution shape, not sampling irregularity. Kurtosis of 6.17 combined with skew of 2.71 indicates a sharply peaked, strongly right-lopsided distribution, consistent with a single transient excursion sitting above an otherwise flat baseline (mean 0.051 vs std 0.133, meaning most samples cluster near zero with one or a few large positive outliers). This is corroborated by the single raw/smoothed peak (1/1/1) and the fact that first-derivative variance (0.0142) is much lower than second-derivative variance (0.0319) with 2 second-diff peaks, implying a brief, sharp-edged spike (fast onset and decay) rather than a slow drift or oscillation. The likely cause is a single-sample or short-duration transient event (e.g., a momentary sensor glitch, discrete event, or short-lived physical spike) rather than a sustained anomaly or timing/sampling fault, since gap irregularity, while high in absolute terms, doesn't align with any repeating or multi-peak structure. Recommend ops pull the raw waveform around the isolated peak to confirm whether it corresponds to a known transient event (thruster firing, momentary power transient, etc.) or an instrumentation artifact, and check adjacent channels for correlated spikes at the same timestamp to rule out a system-wide event.",
+    "number_flags": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ]
+   },
+   "dataset_label": null
+  },
+  "report_source": "teacher_placeholder",
+  "compare": null
+ },
+ {
+  "segment": 293,
+  "channel": "CADC0874",
+  "features": {
+   "len": 441,
+   "duration": 441,
+   "mean": 2.3156192428571427e-06,
+   "std": 1.7116722276417505e-05,
+   "var": 2.9298218148800724e-10,
+   "kurtosis": -1.3067146590575869,
+   "skew": -0.0494912447544697,
+   "n_peaks": 2,
+   "smooth10_n_peaks": 2,
+   "smooth20_n_peaks": 2,
+   "diff_peaks": 1,
+   "diff2_peaks": 4,
+   "diff_var": 1.2326506633859585e-12,
+   "diff2_var": 2.543550423704264e-12,
+   "gaps_squared": 461
+  },
+  "dataset_label": 1,
+  "detector": {
+   "pred": 1,
+   "proba": 1.0,
+   "review": false
+  },
+  "outcome": "correct",
+  "reports": {
+   "detector_label": {
+    "text": "The dominant signal here is the sampling gap irregularity (461), which exceeds the segment length itself (441 samples over 441 time units), indicating the actual time spacing between samples is wildly non-uniform despite a nominally regular index. This is reinforced by the mismatch between low first-derivative variance (1.23e-12) and higher second-derivative variance (2.54e-12) with four second-diff peaks versus only one first-diff peak, suggesting the signal is mostly flat/quiet but punctuated by abrupt timing-driven discontinuities rather than genuine amplitude excursions (kurtosis -1.307 confirms a flat, non-spiky distribution, and only 2 broad peaks persist across all smoothing levels). The most likely cause is a data-handling or telemetry-timing fault (dropped/duplicated samples or clock jitter in the acquisition chain) rather than a real physical transient in the sensed quantity. Recommend ops verify the onboard timestamp/packet sequence log for CADC0874 during this window and cross-check against bus timing records before flagging this as a sensor-level anomaly.",
+    "number_flags": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ]
+   },
+   "dataset_label": null
+  },
+  "report_source": "teacher_placeholder",
+  "compare": null
+ },
+ {
+  "segment": 927,
+  "channel": "CADC0892",
+  "features": {
+   "len": 219,
+   "duration": 233,
+   "mean": 0.3110472352511415,
+   "std": 0.3260893293840229,
+   "var": 0.1063342507381218,
+   "kurtosis": -1.1368463717396025,
+   "skew": 0.6883224954970987,
+   "n_peaks": 1,
+   "smooth10_n_peaks": 1,
+   "smooth20_n_peaks": 1,
+   "diff_peaks": 8,
+   "diff2_peaks": 13,
+   "diff_var": 0.0003733810872618,
+   "diff2_var": 0.0005255569962131,
+   "gaps_squared": 419
+  },
+  "dataset_label": 1,
+  "detector": {
+   "pred": 0,
+   "proba": 0.11,
+   "review": true
+  },
+  "outcome": "missed_anomaly",
+  "reports": {
+   "detector_label": {
+    "text": "This segment shows an elevated mean and standard deviation (0.311 and 0.326 respectively) with a mild positive skew (0.688), indicating the signal sits above baseline for a sustained stretch with a slight lean toward higher excursions rather than symmetric noise. However, the peak structure tells the real story: only a single peak in the raw trace and in both smoothed versions, combined with low derivative variance (0.00037 and 0.00053 for first and second differences), confirms this is a smooth, gradual rise and fall rather than a spike, glitch, or oscillation. The mild negative kurtosis (-1.137) further supports a broad, flat-topped excursion rather than a sharp transient. This pattern is consistent with a normal slow-varying physical trend (e.g., a thermal or power ramp) rather than a sensor fault or data dropout, so no action beyond standard monitoring is needed; continue routine trend logging on this channel.",
+    "number_flags": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ]
+   },
+   "dataset_label": null
+  },
+  "report_source": "finetuned_nf4_greedy",
+  "compare": null
+ },
+ {
+  "segment": 945,
+  "channel": "CADC0892",
+  "features": {
+   "len": 349,
+   "duration": 372,
+   "mean": 0.2143792146131805,
+   "std": 0.2570002703193774,
+   "var": 0.066049138944233,
+   "kurtosis": -0.1905632799986061,
+   "skew": 1.1170644855942395,
+   "n_peaks": 1,
+   "smooth10_n_peaks": 1,
+   "smooth20_n_peaks": 1,
+   "diff_peaks": 49,
+   "diff2_peaks": 75,
+   "diff_var": 8.532917969293105e-05,
+   "diff2_var": 7.144711599919314e-05,
+   "gaps_squared": 480
+  },
+  "dataset_label": 1,
+  "detector": {
+   "pred": 1,
+   "proba": 0.9467,
+   "review": false
+  },
+  "outcome": "correct",
+  "reports": {
+   "detector_label": {
+    "text": "The dominant signal here is the combination of a single, well-defined peak (1/1/1 across raw and smoothed series) with a strong positive skew (1.117) and near-zero excess kurtosis, indicating one sustained, one-sided excursion rather than a spiky or multi-event pattern. What makes this segment worth flagging is the mismatch between that simple large-scale shape and the derivative behavior: first- and second-diff peak counts are high (49/75) while derivative variance is very low (8.5e-05/7.1e-05), meaning the signal is riding a real, single sustained shift but with many small, low-amplitude direction reversals superimposed, consistent with sensor jitter or quantization noise on top of a genuine state change rather than random corruption. The sampling gap irregularity of 480, which exceeds the entire 372-unit segment span, further suggests bursty or uneven data acquisition coincided with this event, possibly due to buffering or mode-switching during the transition. Recommend cross-referencing the timestamp of this excursion against subsystem event logs for a commanded state change (e.g., valve, heater, or actuator cycle) and auditing the telemetry acquisition timing to confirm whether the sampling irregularity reflects a real hardware event or a data-handling artifact.",
+    "number_flags": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ]
+   },
+   "dataset_label": null
+  },
+  "report_source": "teacher_placeholder",
+  "compare": null
+ },
+ {
+  "segment": 1022,
+  "channel": "CADC0873",
+  "features": {
+   "len": 71,
+   "duration": 350,
+   "mean": -4.43960061971831e-06,
+   "std": 1.0471748349495458e-05,
+   "var": 1.0965751349516084e-10,
+   "kurtosis": -1.2581931301259093,
+   "skew": -0.1050618920504272,
+   "n_peaks": 1,
+   "smooth10_n_peaks": 1,
+   "smooth20_n_peaks": 1,
+   "diff_peaks": 22,
+   "diff2_peaks": 22,
+   "diff_var": 1.10128297478529e-12,
+   "diff2_var": 9.448631186371337e-13,
+   "gaps_squared": 1750
+  },
+  "dataset_label": 0,
+  "detector": {
+   "pred": 0,
+   "proba": 0.0233,
+   "review": false
+  },
+  "outcome": "correct",
+  "reports": {
+   "detector_label": {
+    "text": "The dominant feature here is the mismatch between low peak counts in the raw signal (1/1/1 across smoothing levels) and the high derivative peak count (22/22 in first and second differences), despite very low derivative variance (~1e-12). This pattern indicates a signal that is essentially flat with a single broad, smooth excursion, and the numerous small derivative peaks simply reflect low-amplitude sample-to-sample noise riding on that flat baseline rather than any structural instability, consistent with the tight standard deviation (1.05e-05) and near-symmetric, platykurtic shape (kurtosis -1.258, skew -0.105). The sampling gap irregularity of 1750 is unremarkable in this context since it does not correlate with any derivative or amplitude anomaly. Likely cause: normal low-level sensor noise on an otherwise stable, single-trend channel, with no evidence of transient events or data corruption. No action needed beyond routine monitoring; confirm nominal status stands.",
+    "number_flags": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ]
+   },
+   "dataset_label": null
+  },
+  "report_source": "teacher_placeholder",
+  "compare": null
+ },
+ {
+  "segment": 1035,
+  "channel": "CADC0873",
+  "features": {
+   "len": 46,
+   "duration": 225,
+   "mean": 9.770738413043475e-06,
+   "std": 2.695951299927224e-05,
+   "var": 7.268153411579288e-10,
+   "kurtosis": -1.2904609021546236,
+   "skew": -0.0706756263812322,
+   "n_peaks": 1,
+   "smooth10_n_peaks": 1,
+   "smooth20_n_peaks": 1,
+   "diff_peaks": 4,
+   "diff2_peaks": 17,
+   "diff_var": 1.3918617385010446e-11,
+   "diff2_var": 1.8500796052638207e-12,
+   "gaps_squared": 1125
+  },
+  "dataset_label": 0,
+  "detector": {
+   "pred": 0,
+   "proba": 0.0167,
+   "review": false
+  },
+  "outcome": "correct",
+  "reports": {
+   "detector_label": {
+    "text": "The most informative feature here is the sampling gap irregularity (1125) set against an otherwise unremarkable statistical profile: low-magnitude mean and std dev, near-Gaussian kurtosis (-1.29, platykurtic but not extreme), minimal skew, and a single consistent peak across all smoothing levels. This combination indicates the underlying signal is flat and well-behaved, with only the cadence of sampling showing irregularity rather than the sensor reading itself. The derivative peak counts (4 in first diff, 17 in second diff) are proportionate to normal sample-to-sample noise at this variance level and don't suggest any transient event or instability. Likely cause is a benign timing/telemetry downlink artifact (e.g., variable ground station pass scheduling or buffer flushing) rather than any physical anomaly in the sensed parameter. No action needed beyond routine confirmation that data gaps align with known downlink schedule; label of NOMINAL is well-supported by the data.",
+    "number_flags": [
+     1,
+     1,
+     1,
+     1
+    ]
+   },
+   "dataset_label": null
+  },
+  "report_source": "teacher_placeholder",
+  "compare": null
+ },
+ {
+  "segment": 1183,
+  "channel": "CADC0873",
+  "features": {
+   "len": 73,
+   "duration": 484,
+   "mean": -3.483687068493151e-06,
+   "std": 2.033880052150805e-05,
+   "var": 4.1366680665369614e-10,
+   "kurtosis": -1.1187194084150298,
+   "skew": -0.3538341250313752,
+   "n_peaks": 2,
+   "smooth10_n_peaks": 1,
+   "smooth20_n_peaks": 1,
+   "diff_peaks": 1,
+   "diff2_peaks": 6,
+   "diff_var": 1.7154743485767584e-11,
+   "diff2_var": 3.158558577629212e-11,
+   "gaps_squared": 17928
+  },
+  "dataset_label": 1,
+  "detector": {
+   "pred": 1,
+   "proba": 0.9833,
+   "review": false
+  },
+  "outcome": "correct",
+  "reports": {
+   "detector_label": {
+    "text": "The dominant signal here is the sampling gap irregularity (17928), which is enormous relative to the nominal cadence implied by 73 samples over 484 time units (~6.6 units/sample average). This magnitude points to a major timing discontinuity, likely one or more large data dropouts or a telemetry buffer/downlink gap, rather than a real physical transient, since the amplitude-domain stats (mean ~-3.5e-6, std ~2e-5, kurtosis -1.12, skew -0.35) all describe a flat, near-symmetric, low-variance signal with no evidence of a real spike or shift. The peak counts are low and collapse to a single peak under smoothing, and derivative variances are tiny, confirming the raw waveform itself is unremarkable; the anomaly label is being driven by the irregular time-base, not by sensor amplitude behavior. Recommend ops cross-check the raw timestamp record for CADC0873 against ground station contact windows or onboard recorder buffering logs to confirm a data gap/reacquisition event, and if confirmed, flag this segment as a timing/sampling artifact rather than a physical anomaly before it propagates into downstream trend analysis.",
+    "number_flags": [
+     1,
+     1,
+     1,
+     0,
+     1,
+     1,
+     1,
+     1
+    ]
+   },
+   "dataset_label": null
+  },
+  "report_source": "teacher_placeholder",
+  "compare": null
+ },
+ {
+  "segment": 1280,
+  "channel": "CADC0873",
+  "features": {
+   "len": 46,
+   "duration": 225,
+   "mean": 2.569651521739128e-07,
+   "std": 2.3970693494438185e-05,
+   "var": 5.74594146604301e-10,
+   "kurtosis": -1.4412480388761355,
+   "skew": 0.0015786263019065,
+   "n_peaks": 1,
+   "smooth10_n_peaks": 1,
+   "smooth20_n_peaks": 1,
+   "diff_peaks": 6,
+   "diff2_peaks": 13,
+   "diff_var": 1.1051867636104647e-11,
+   "diff2_var": 2.0028387670352775e-12,
+   "gaps_squared": 1125
+  },
+  "dataset_label": 0,
+  "detector": {
+   "pred": 0,
+   "proba": 0.0067,
+   "review": false
+  },
+  "outcome": "correct",
+  "reports": {
+   "detector_label": {
+    "text": "Statistics here are internally consistent with a quiet, near-zero-amplitude channel: the mean (2.57e-7) is effectively zero relative to a small std dev (2.4e-5), kurtosis of -1.44 indicates a flat, platykurtic distribution rather than a spiky fault signature, and skew is negligible, meaning no lopsided transient is present. Peak counts stay at 1 across raw and smoothed views, confirming a single, non-repeating feature rather than noise or oscillation, and the derivative peak counts (6 first-diff, 13 second-diff) are modest and proportional to normal sample-to-sample variation given the low derivative variances (1.1e-11, 2.0e-12). The sampling gap irregularity of 1125 looks large in isolation but with only 46 samples over 225 time units this simply reflects uneven but bounded cadence, not a data dropout, since it does not manifest in the variance or peak structure. This segment is consistent with NOMINAL: the flat distribution, single stable peak, and low derivative energy together indicate a stable low-signal channel with no corrective action needed beyond routine monitoring.",
+    "number_flags": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ]
+   },
+   "dataset_label": null
+  },
+  "report_source": "teacher_placeholder",
+  "compare": null
+ },
+ {
+  "segment": 1522,
+  "channel": "CADC0888",
+  "features": {
+   "len": 56,
+   "duration": 275,
+   "mean": 0.1958417148214285,
+   "std": 0.2389007235176088,
+   "var": 0.0570735556972369,
+   "kurtosis": -1.1038920292553691,
+   "skew": 0.7467318907957123,
+   "n_peaks": 1,
+   "smooth10_n_peaks": 1,
+   "smooth20_n_peaks": 1,
+   "diff_peaks": 2,
+   "diff2_peaks": 8,
+   "diff_var": 0.0012249148997613,
+   "diff2_var": 0.0002749314214813,
+   "gaps_squared": 1375
+  },
+  "dataset_label": 0,
+  "detector": {
+   "pred": 1,
+   "proba": 0.62,
+   "review": true
+  },
+  "outcome": "false_alarm",
+  "reports": {
+   "detector_label": {
+    "text": "This segment stands out mainly for its elevated mean and variance combined with a single dominant peak that persists across both raw and smoothed traces (1/1/1), meaning the signal isn't showing noisy multi-modal behavior but rather a sustained elevated level with a single broad excursion. The positive skew (0.747) with near-zero kurtosis (-1.104) suggests a broad, lopsided rise rather than a sharp spike or oscillation, consistent with a slow ramp or plateau rather than a transient glitch. The second-derivative peak count (8) against a low first-derivative peak count (2) indicates the signal is changing direction multiple times over its duration, but the overall shape is still dominated by one broad feature, not high-frequency chatter. The sampling gap irregularity (1375) is also notably high, which could be amplifying the apparent variance if samples are unevenly spaced, so it's worth checking the timestamp log for this channel before trusting the derivative statistics alone. Recommend pulling the raw waveform for this window to visually confirm whether the elevated plateau is a real physical event (e.g., a thermal or power transient) or an artifact of irregular sampling, and cross-check against adjacent channels to see if the elevated level correlates with a known operational event.",
+    "number_flags": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ]
+   },
+   "dataset_label": null
+  },
+  "report_source": "finetuned_nf4_greedy",
+  "compare": null
+ },
+ {
+  "segment": 1617,
+  "channel": "CADC0888",
+  "features": {
+   "len": 33,
+   "duration": 160,
+   "mean": 0.1117575212121212,
+   "std": 0.0965870963286402,
+   "var": 0.009329067177198,
+   "kurtosis": -1.6753679344795345,
+   "skew": -0.0527532562074492,
+   "n_peaks": 2,
+   "smooth10_n_peaks": 1,
+   "smooth20_n_peaks": 1,
+   "diff_peaks": 1,
+   "diff2_peaks": 1,
+   "diff_var": 0.0027587969128593,
+   "diff2_var": 0.0072779907206237,
+   "gaps_squared": 800
+  },
+  "dataset_label": 1,
+  "detector": {
+   "pred": 1,
+   "proba": 0.9167,
+   "review": false
+  },
+  "outcome": "correct",
+  "reports": {
+   "detector_label": {
+    "text": "The dominant signal here is sampling gap irregularity (800) against a nominal spacing of roughly 4.8 time units (160/33) implied by segment length, an irregularity value nearly two orders of magnitude above what even coarse timing jitter would produce. This is reinforced by the otherwise unremarkable signal shape statistics: flat kurtosis (-1.675) indicating a platykurtic, non-spiky distribution, near-zero skew, and low derivative variance (0.00276 first-diff, 0.00728 second-diff) with only a single derivative peak, none of which suggest a real physical transient. Together this points to a telemetry acquisition or downlink issue, most likely dropped or unevenly spaced packets, rather than an actual sensor-driven anomaly, since the signal amplitude and shape remain smooth and low-variance. Ops should cross-check downlink/bus logs and adjacent channels sharing this telemetry frame for concurrent gaps to confirm a systemic data-handling fault rather than a CADC0888-specific sensor event.",
+    "number_flags": [
+     1,
+     0,
+     1,
+     1,
+     1,
+     1,
+     1
+    ]
+   },
+   "dataset_label": null
+  },
+  "report_source": "teacher_placeholder",
+  "compare": null
+ },
+ {
+  "segment": 1734,
+  "channel": "CADC0894",
+  "features": {
+   "len": 474,
+   "duration": 550,
+   "mean": 0.1224669864556962,
+   "std": 0.1689017265900995,
+   "var": 0.0285277932451167,
+   "kurtosis": -0.9815839069060076,
+   "skew": 0.8584241738638637,
+   "n_peaks": 2,
+   "smooth10_n_peaks": 2,
+   "smooth20_n_peaks": 1,
+   "diff_peaks": 2,
+   "diff2_peaks": 28,
+   "diff_var": 3.047642614284313e-05,
+   "diff2_var": 2.468561460835256e-05,
+   "gaps_squared": 770
+  },
+  "dataset_label": 0,
+  "detector": {
+   "pred": 1,
+   "proba": 0.8,
+   "review": true
+  },
+  "outcome": "false_alarm",
+  "reports": {
+   "detector_label": {
+    "text": "This segment stands out mainly for its elevated mean and variance combined with a right-skewed distribution (skew 0.858), indicating the signal is sitting at a sustained elevated level with occasional sharp excursions rather than just noise. The second-derivative peak count (28) is far higher than the first-derivative count (2) and the raw/smoothed peak counts (2/2/1), which points to a lot of small, rapid fluctuations riding on top of a broader trend rather than a single clean event. This pattern is consistent with sensor chatter or a marginal electrical/thermal transient superimposed on a real signal shift, rather than a clean step or spike. Recommend pulling the raw waveform for this window to visually confirm whether the high-frequency derivative noise is a real physical oscillation (check for heater cycling, connector vibration, or ADC noise) or an artifact of a marginal sensor connection, and cross-check against adjacent channels or housekeeping data for corroborating thermal/electrical activity before flagging as a hardware fault.",
+    "number_flags": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ]
+   },
+   "dataset_label": null
+  },
+  "report_source": "finetuned_nf4_greedy",
+  "compare": null
+ },
+ {
+  "segment": 1793,
+  "channel": "CADC0894",
+  "features": {
+   "len": 630,
+   "duration": 685,
+   "mean": 0.2147262847301587,
+   "std": 0.2468755310988406,
+   "var": 0.0609475278553346,
+   "kurtosis": -1.3228339964852194,
+   "skew": 0.6025396940366631,
+   "n_peaks": 5,
+   "smooth10_n_peaks": 1,
+   "smooth20_n_peaks": 1,
+   "diff_peaks": 39,
+   "diff2_peaks": 92,
+   "diff_var": 1.915308884249297e-05,
+   "diff2_var": 1.584993959665543e-05,
+   "gaps_squared": 941
+  },
+  "dataset_label": 1,
+  "detector": {
+   "pred": 0,
+   "proba": 0.2,
+   "review": true
+  },
+  "outcome": "missed_anomaly",
+  "reports": {
+   "detector_label": {
+    "text": "This segment shows an elevated mean and standard deviation (0.215 and 0.247) with a moderate positive skew (0.603), indicating the signal sits above baseline for a sustained stretch with a mild lean toward higher excursions rather than symmetric noise. The raw peak count of 5 collapses to a single peak once smoothed at both the 10- and 20-sample windows, which tells us these are just small-scale wiggles riding on a broader, smoother trend rather than genuine multi-modal structure. Derivative peak counts (39 and 92) are a bit active relative to the raw peak count, but derivative variances remain low (on the order of 1e-5), so this reflects normal sample-to-sample jitter rather than sharp transients or discontinuities. Sampling gap irregularity (941) is unremarkable for this channel and doesn't suggest timing dropouts. Overall this looks like a smooth, moderately elevated signal with normal sensor noise, consistent with the NOMINAL label; no action needed beyond routine monitoring.",
+    "number_flags": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     0,
+     1
+    ]
+   },
+   "dataset_label": null
+  },
+  "report_source": "finetuned_nf4_greedy",
+  "compare": null
+ },
+ {
+  "segment": 1808,
+  "channel": "CADC0872",
+  "features": {
+   "len": 117,
+   "duration": 580,
+   "mean": 3.741888811965812e-06,
+   "std": 2.054935377757219e-05,
+   "var": 4.2227594067582044e-10,
+   "kurtosis": -1.4018470241716396,
+   "skew": -0.1044377543967828,
+   "n_peaks": 1,
+   "smooth10_n_peaks": 1,
+   "smooth20_n_peaks": 1,
+   "diff_peaks": 26,
+   "diff2_peaks": 39,
+   "diff_var": 1.6850315421829718e-12,
+   "diff2_var": 8.876349870416091e-13,
+   "gaps_squared": 2900
+  },
+  "dataset_label": 0,
+  "detector": {
+   "pred": 0,
+   "proba": 0.0067,
+   "review": false
+  },
+  "outcome": "correct",
+  "reports": {
+   "detector_label": {
+    "text": "This segment is best characterized by the mismatch between low-order statistics and derivative behavior: mean and variance are near zero (3.74e-06, 4.22e-10) with a flat, slightly negative kurtosis (-1.402), consistent with a quiet, low-amplitude signal. Yet the first and second derivative peak counts (26 and 39) are relatively high against only 117 samples, while derivative variances remain extremely small (1.68e-12, 8.88e-13). This pattern indicates the signal is dominated by low-amplitude, high-frequency dither or sensor quantization noise rather than any discrete event, since a real transient would produce a single dominant peak in the raw/smoothed peak counts (which stay at 1 across all smoothing levels) and would raise derivative variance proportionally. The sampling gap irregularity of 2900 is present but not exceptional given the segment length and does not correlate with any amplitude or shape anomaly, so it is not the driving factor here. Recommend no action beyond routine monitoring; if desired, a light low-pass filter check could confirm the derivative peaks are consistent with expected instrument noise floor rather than an emerging trend.",
+    "number_flags": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ]
+   },
+   "dataset_label": null
+  },
+  "report_source": "teacher_placeholder",
+  "compare": null
+ },
+ {
+  "segment": 2055,
+  "channel": "CADC0872",
+  "features": {
+   "len": 54,
+   "duration": 265,
+   "mean": 5.6881284259259255e-06,
+   "std": 3.203168928448864e-05,
+   "var": 1.026029118418024e-09,
+   "kurtosis": -1.407236277116529,
+   "skew": -0.0902641879606272,
+   "n_peaks": 1,
+   "smooth10_n_peaks": 1,
+   "smooth20_n_peaks": 1,
+   "diff_peaks": 6,
+   "diff2_peaks": 19,
+   "diff_var": 1.4033993545353987e-11,
+   "diff2_var": 1.631225667984247e-12,
+   "gaps_squared": 1325
+  },
+  "dataset_label": 0,
+  "detector": {
+   "pred": 0,
+   "proba": 0.0,
+   "review": false
+  },
+  "outcome": "correct",
+  "reports": {
+   "detector_label": {
+    "text": "This segment's dominant feature is the sampling gap irregularity of 1325 against only 54 samples over 265 time units, indicating markedly non-uniform data acquisition timing rather than any anomaly in the sensed quantity itself. This is reinforced by the low variance (1.03e-09) and negative kurtosis (-1.407), which show the underlying signal is flat and platykurtic with no spiky excursions, while the mismatch between raw peak count (1) and derivative peak counts (6 first-diff, 19 second-diff) is consistent with irregular time spacing amplifying apparent local slope changes rather than reflecting real signal transients. The likely cause is a telemetry downlink or buffering artifact causing uneven sample timing, not a physical event in the monitored parameter. Recommend ops confirm the onboard data handling or ground station scheduling log for this window to rule out a recurring gap pattern, but no corrective action on the sensor itself is warranted given the NOMINAL label and benign amplitude statistics.",
+    "number_flags": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ]
+   },
+   "dataset_label": null
+  },
+  "report_source": "teacher_placeholder",
+  "compare": null
+ }
+]

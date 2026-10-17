@@ -1,0 +1,116 @@
+{
+  "_comment": "Real numbers from the evaluation run. Render these on the Results page. Do not edit values. Fields set to null are TODOs for the owner; show a 'pending' state, never an invented number.",
+  "eval_set": {
+    "n_segments": 158,
+    "anomalies": 79,
+    "nominal": 79,
+    "detector_errors_included": 18,
+    "note": "Balanced sample of the held-out test split plus every segment the detector got wrong. Rates describe generation quality on this sample, not population rates. Intervals are 95% Wilson."
+  },
+  "arms": [
+    {
+      "id": "teacher",
+      "label": "Teacher (Claude Sonnet 5)",
+      "format_ok": {"pct": 100, "lo": 98, "hi": 100},
+      "em_dash": {"pct": 0, "lo": 0, "hi": 2},
+      "markdown": {"pct": 0, "lo": 0, "hi": 2},
+      "dataset_language": {"pct": 0, "lo": 0, "hi": 2},
+      "truncated": {"pct": 0, "lo": 0, "hi": 2},
+      "mean_words": 164,
+      "numbers_per_report": 5.7,
+      "any_unsupported_number": {"pct": 6, "lo": 3, "hi": 10},
+      "verdict_anomaly_on_anomalies": {"pct": 100, "lo": 95, "hi": 100},
+      "verdict_nominal_on_nominals": {"pct": 100, "lo": 95, "hi": 100}
+    },
+    {
+      "id": "finetuned",
+      "label": "This model (Qwen3-4B + LoRA)",
+      "format_ok": {"pct": 100, "lo": 98, "hi": 100},
+      "em_dash": {"pct": 0, "lo": 0, "hi": 2},
+      "markdown": {"pct": 0, "lo": 0, "hi": 2},
+      "dataset_language": {"pct": 0, "lo": 0, "hi": 2},
+      "truncated": {"pct": 0, "lo": 0, "hi": 2},
+      "mean_words": 158,
+      "numbers_per_report": 6.4,
+      "any_unsupported_number": {"pct": 6, "lo": 3, "hi": 10},
+      "verdict_anomaly_on_anomalies": {"pct": 100, "lo": 95, "hi": 100},
+      "verdict_nominal_on_nominals": {"pct": 100, "lo": 95, "hi": 100}
+    },
+    {
+      "id": "base_prompted",
+      "label": "Base Qwen3-4B, prompted",
+      "format_ok": {"pct": 41, "lo": 33, "hi": 48},
+      "em_dash": {"pct": 59, "lo": 52, "hi": 67},
+      "markdown": {"pct": 0, "lo": 0, "hi": 2},
+      "dataset_language": {"pct": 0, "lo": 0, "hi": 2},
+      "truncated": {"pct": 0, "lo": 0, "hi": 2},
+      "mean_words": 156,
+      "numbers_per_report": 10.7,
+      "any_unsupported_number": {"pct": 1, "lo": 0, "hi": 4},
+      "verdict_anomaly_on_anomalies": {"pct": 100, "lo": 95, "hi": 100},
+      "verdict_nominal_on_nominals": {"pct": 100, "lo": 95, "hi": 100}
+    }
+  ],
+  "arm_notes": [
+    "Format failures for the prompted base are almost entirely em dashes, which a text filter would fix. The result shows consistency without post-processing and without a long style prompt.",
+    "The prompted base has fewer unsupported numbers because it copies numbers verbatim. The teacher and this model paraphrase and derive values such as ratios.",
+    "Verdict rows are not discriminating: every model was given the true label and followed it."
+  ],
+  "judge": {
+    "judge_model": "Claude Sonnet 5",
+    "method": "Blind pairwise, A/B order randomized, 60 segments per pair, half anomalies and half nominal.",
+    "bias_note": "The judge is the same model family as the teacher, so it likely favours the teacher's writing style, which this model imitates. Read the first row as a clear but probably overstated edge, and the second as parity with the teacher.",
+    "pairs": [
+      {"pair": "finetuned_vs_base_prompted", "n": 60, "wins": 53, "ties": 2, "losses": 5, "unsupported_claims_per_report": {"finetuned": 0.55, "base_prompted": 1.47}},
+      {"pair": "finetuned_vs_teacher", "n": 60, "wins": 21, "ties": 21, "losses": 18, "unsupported_claims_per_report": {"finetuned": 0.40, "teacher": 0.42}}
+    ]
+  },
+  "detector_errors": {
+    "n": 18,
+    "false_alarms": 8,
+    "missed_anomalies": 10,
+    "report_follows_detector": {"k": 18, "n": 18},
+    "mean_detector_probability": {"false_alarm": 0.64, "missed_anomaly": 0.20},
+    "summary": "When the detector's flag was wrong, the report followed the wrong flag in every case. The model explains whatever flag it is given."
+  },
+  "timing_lean": {
+    "definition": "The report's last sentence, the recommended next step, tells ops to check timestamps, packet logs, buffers, the downlink, or sampling clocks.",
+    "anomalies_compared": 79,
+    "student_pct": 82,
+    "teacher_pct": 66,
+    "student_only": 22,
+    "teacher_only": 9,
+    "sign_test_p": 0.029,
+    "by_group_test": [
+      {"group": "gaps_squared != duration", "n": 68, "teacher_pct": 63, "finetuned_pct": 82, "base_prompted_pct": 90},
+      {"group": "gaps_squared == duration", "n": 11, "teacher_pct": 82, "finetuned_pct": 82, "base_prompted_pct": 9}
+    ],
+    "training_reports_pct": {"gaps_squared != duration": 70, "gaps_squared == duration": 61},
+    "summary": "The model recommends a timing-focused next step more often than its teacher. Greedy decoding amplifies the teacher's majority habit."
+  },
+  "review_band": {
+    "note": "Chosen on the test split with only 19 detector errors, so the catch rates are optimistic. cross_validated is pending.",
+    "test_split": [
+      {"band": [0.1, 0.9], "flagged_pct": 20, "errors_caught": 18, "errors_total": 19},
+      {"band": [0.2, 0.8], "flagged_pct": 12, "errors_caught": 13, "errors_total": 19},
+      {"band": [0.3, 0.7], "flagged_pct": 7, "errors_caught": 8, "errors_total": 19}
+    ],
+    "cross_validated": null
+  },
+  "detector": {
+    "model": "Random Forest, 300 trees, class_weight=balanced, 15 features",
+    "test_accuracy": null,
+    "test_precision": null,
+    "test_recall": null
+  },
+  "training": {
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+    "method": "QLoRA (4-bit NF4), LoRA r=16 alpha=32 dropout=0.05 on all attention and MLP projections",
+    "epochs": 3,
+    "effective_batch_size": 16,
+    "learning_rate": "2e-4, cosine, 8 warmup steps",
+    "final_train_loss": 0.58,
+    "final_validation_loss": 0.71,
+    "loss": "completion tokens only"
+  }
+}

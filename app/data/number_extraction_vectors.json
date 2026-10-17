@@ -1,0 +1,73 @@
+{
+ "note": "The browser finds numbers in a report with this regex and zips them with number_flags from the data file. Extraction must match these rows exactly.",
+ "regex_js": "/(?<![\\w.])[-+]?\\d+(?:\\.\\d+)?(?:[eE][-+]?\\d+)?(?!\\w)/g",
+ "extraction": [
+  {
+   "text": "derivative peak counts (78 and 87)",
+   "numbers": [
+    "78",
+    "87"
+   ]
+  },
+  {
+   "text": "peaks are 1/1/1",
+   "numbers": [
+    "1",
+    "1",
+    "1"
+   ]
+  },
+  {
+   "text": "a 257-sample record",
+   "numbers": [
+    "257"
+   ]
+  },
+  {
+   "text": "channel CADC0872 is quiet",
+   "numbers": []
+  },
+  {
+   "text": "about ~5.5e-13 for both",
+   "numbers": [
+    "5.5e-13"
+   ]
+  },
+  {
+   "text": "kurtosis (-1.484) is flat",
+   "numbers": [
+    "-1.484"
+   ]
+  },
+  {
+   "text": "a value of 229.",
+   "numbers": [
+    "229"
+   ]
+  },
+  {
+   "text": "smoothed-10 and smoothed-20 traces",
+   "numbers": [
+    "10",
+    "20"
+   ]
+  },
+  {
+   "text": "the 1st and 2nd differences",
+   "numbers": []
+  },
+  {
+   "text": "mean 1.17079e-05 and 3.74e-06",
+   "numbers": [
+    "1.17079e-05",
+    "3.74e-06"
+   ]
+  },
+  {
+   "text": "rate of +2.5 units",
+   "numbers": [
+    "+2.5"
+   ]
+  }
+ ]
+}

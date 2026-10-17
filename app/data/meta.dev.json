@@ -1,0 +1,13 @@
+{
+  "dev_fixture": true,
+  "generated_at": null,
+  "n_segments": 17,
+  "review_band": {"low": 0.1, "high": 0.9},
+  "report_source": "mixed: finetuned_nf4_greedy and teacher_placeholder",
+  "links": {
+    "github": null,
+    "model_card": null,
+    "writeup": null,
+    "dataset": null
+  }
+}
