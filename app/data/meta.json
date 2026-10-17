@@ -1,0 +1,16 @@
+{
+ "generated_at": "2026-10-17T19:19:18+00:00",
+ "n_segments": 529,
+ "n_with_comparison": 158,
+ "n_judged": 60,
+ "outcomes": {
+  "correct": 510,
+  "missed_anomaly": 11,
+  "false_alarm": 8
+ },
+ "review_band": {
+  "low": 0.1,
+  "high": 0.9
+ },
+ "report_source": "finetuned_nf4_greedy"
+}
