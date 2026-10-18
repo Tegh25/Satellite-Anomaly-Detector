@@ -44,14 +44,14 @@ Owner details (name, links, dataset citation) live in `src/config.ts`. All inter
 ### Hugging Face Static Space (primary)
 
 1. Create a Space with the **Static** SDK, for example `Tegh25/satellite-anomaly-reporter`.
-2. Make sure `git push` to `https://huggingface.co/spaces/<owner>/<space>` works on your machine (a Hugging Face access token with write scope, used as the git password).
+2. Add your SSH public key at [huggingface.co/settings/keys](https://huggingface.co/settings/keys) and confirm `ssh -T git@hf.co` works.
 3. Run:
 
    ```bash
    npm run deploy:space -- --space Tegh25/satellite-anomaly-reporter
    ```
 
-   The script builds, clones the Space next to this repo (`../../hf-space` by default, override with `--dir`), replaces its contents with `dist/` plus `space/README.md`, then commits and pushes. Add `--no-push` to inspect the commit first. Hugging Face's own build step is not used.
+   The script builds, clones via SSH (`git@hf.co:spaces/<owner>/<space>`), replaces the Space contents with `dist/` plus `space/README.md`, then commits and pushes. An existing HTTPS clone is rewritten to SSH. Override the clone path with `--dir`; add `--no-push` to inspect the commit first. Hugging Face's own build step is not used.
 
 The Space page on huggingface.co shows the app inside an iframe, so hash routes such as `#/segment/1522` do not appear in the address bar there. Share the app's **direct URL** instead. Find it in the Space's "Embed this Space" dialog; it should look like `https://tegh25-satellite-anomaly-reporter.static.hf.space`.
 
