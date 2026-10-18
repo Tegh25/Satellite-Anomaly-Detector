@@ -99,9 +99,9 @@
   },
   "detector": {
     "model": "Random Forest, 300 trees, class_weight=balanced, 15 features",
-    "test_accuracy": null,
-    "test_precision": null,
-    "test_recall": null
+    "test_accuracy": 0.964,
+    "test_precision": 0.927,
+    "test_recall": 0.903
   },
   "training": {
     "base_model": "Qwen/Qwen3-4B-Instruct-2507",

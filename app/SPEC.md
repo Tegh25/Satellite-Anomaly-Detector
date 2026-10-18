@@ -262,7 +262,7 @@ Algorithm: iterate `text.matchAll(NUM_RE)`; the i-th match gets `number_flags[i]
   - One dataset, features instead of raw signals, English only, a small evaluation sample.
   - The judge is the same model family as the teacher, so it likely favours the teacher's style.
 - **Credits:** Dataset: OPSSAT-AD (**OPEN:** citation and licence from the dataset page). Base model: Qwen3-4B-Instruct-2507 (Apache 2.0). Teacher reports: Claude Sonnet 5.
-- **Footer:** Built by {OWNER_NAME}. Links: GitHub, model card, write-up (**OPEN**).
+- **Footer:** Built by Teghveer Singh Ateliey. Links: GitHub, model card, write-up (**OPEN**).
 
 ---
 
@@ -306,11 +306,18 @@ Only start this after Phase 1 is deployed. **Do a 30-minute spike first**; if it
 
 ## 12. Open items for the owner
 
-- Hugging Face username and Space name; GitHub, model-card and write-up URLs; `OWNER_NAME`.
+- Hugging Face username and Space name; GitHub, model-card and write-up URLs; `Teghveer Singh Ateliey`.
 - Dataset citation and licence.
 - Detector test accuracy, precision and recall; the cross-validated review-band result; both are `null` in `results.json` until filled.
 - Final review-band thresholds (default 0.1 and 0.9).
 - Run the data export (Appendix A) and replace the dev files.
+
+Hugging Face model URL: https://huggingface.co/Tegh25/satellite-anomaly-reporter-qwen3-4b-lora
+Hugging Face username: Tegh25
+GitHub repo: https://github.com/Tegh25/Satellite-Anomaly-Detector
+GitHub username: Tegh25
+Dataset: https://zenodo.org/records/12588359
+Metrics, results, and dataset citation/license can be found in `local\MODEL_CARD.md`
 
 ---
 
