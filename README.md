@@ -11,8 +11,6 @@ Two-minute tour (phone-friendly): open the [live demo](https://tegh25-satellite-
 | **Model** | [Tegh25/satellite-anomaly-reporter-qwen3-4b-lora](https://huggingface.co/Tegh25/satellite-anomaly-reporter-qwen3-4b-lora) (Qwen3-4B LoRA · Apache 2.0 · 1 like) |
 | **Data** | [OPSSAT-AD](https://zenodo.org/records/12588359) — ESA OPS-SAT telemetry features (CC BY 4.0) |
 
-Hugging Face does not publish public visit counts for Spaces; the Hub API only exposes likes and runtime metadata for this Space.
-
 ---
 
 ## What this is
